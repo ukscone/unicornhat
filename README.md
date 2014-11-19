@@ -8,3 +8,4 @@ messing around with my unicorn HAT and made a silly little utility to send the s
 it's rubbish coz i don't python & what python i do do i suck at
 
 ls -al | sudo ./unimess.py 
+ /sbin/ifconfig | sed -n '/inet [Aa]d\{1,2\}r\{0,1\}:/ { s# *inet [Aa]d\{1,2\}r\{0,1\}:##; s# .*##p }' | sudo ./unimess.py
