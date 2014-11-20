@@ -49,7 +49,7 @@ def updateGrid(keypressed):
                     while grid[row+2][column]==0:
                         grid[row+2][column]=grid[row+3][column]
                         grid[row+3][column]=0
-        i=0
+        row=0
         for column in range(0,4):
             if grid[row][column]==grid[row+1][column]:
                 grid[row][column]=grid[row][column]+grid[row+1][column]
@@ -67,7 +67,7 @@ def updateGrid(keypressed):
                         
           
     elif keypressed == "d":
-        i=0
+        row=0
         for column in range(0,4):
             if grid[row][column]!=0 or grid[row+1][column]!=0 or grid[row+2][column]!=0 or grid[row+3][column]!=0:
                 if grid[row+3][column]==0:
@@ -86,7 +86,7 @@ def updateGrid(keypressed):
                     while grid[row+1][column]==0:
                         grid[row+1][column]=grid[row][column]
                         grid[row][column]=0
-        i=0
+        row=0
         for column in range(0,4):
             if grid[row+3][column]==grid[row+2][column]:
                 grid[row+3][column]=grid[row+3][column] + grid[row+2][column]
