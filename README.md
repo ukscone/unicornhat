@@ -7,6 +7,7 @@ unimess
 utility to send the stdin and dump it on to the unicorn HAT a char at a time.
 
 ls -al | sudo ./unimess.py 
+
  /sbin/ifconfig | sed -n '/inet [Aa]d\{1,2\}r\{0,1\}:/ { s# *inet [Aa]d\{1,2\}r\{0,1\}:##; s# .*##p }' | sudo ./unimess.py
 
 uni-2048
