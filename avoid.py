@@ -27,7 +27,7 @@ def drawObstacles():
     unicorn.show()
 
 def addObstacle():
-    r=random.randrange(0,2)
+    r=random.randrange(0,abs(10-(score/10)))
     if r==1:
         screen[0][random.randrange(0,7)]=64
 
