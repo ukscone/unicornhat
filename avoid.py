@@ -27,13 +27,13 @@ def drawObstacles():
     unicorn.show()
 
 def addObstacle():
-    r=random.randrange(0,abs(10-(score/10)))
+    r=random.randrange(0,(10-abs(score/10)))
     if r==1:
-        screen[0][random.randrange(0,7)]=64
+        screen[0][random.randrange(0,8)]=64
 
 def moveObstacles():
     for y in range(7,-1,-1):
-        for x in range(7):
+        for x in range(8):
             screen[y][x]=screen[y-1][x]
 
 def drawCar(y, x):
