@@ -14,3 +14,9 @@ uni-2048
 ========
 
 Borrowed ( http://www.thetaranights.com/make-a-2048-game-in-python/ )& modded python version of 2048 that uses unicornHAT as the display.
+
+avoid
+=====
+
+Simple obstacle avoiding game (very micky mouse)
+q to move left, w to move right, space to stay still & x to exit
