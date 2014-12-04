@@ -8,6 +8,8 @@ unicorn.rotation(90)
 unicorn.brightness(0.2)
 
 str="*** Merry Christmas ***"
+fore="red"
+back="green"
 
 def scroll(image):
     width,height = image.size
@@ -20,10 +22,10 @@ def scroll(image):
        time.sleep(0.3)
 
 
-image = Image.new( 'RGB', (8*len(str),8), "red")
+image = Image.new( 'RGB', (8*len(str),8), back)
 draw = ImageDraw.Draw(image)
 font = ImageFont.truetype("Beeb.ttf", 8)
 
-draw.text((0, 0),str, font=font,fill=(0,255,0))
+draw.text((0, 0),str, font=font,fill=fore)
 
 scroll(image)
