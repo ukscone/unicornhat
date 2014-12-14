@@ -2,7 +2,7 @@
 
 import unicornhat as unicorn
 from PIL import ImageFont, ImageDraw, Image
-import time
+import time, sys, getopt
 
 unicorn.rotation(90)
 unicorn.brightness(0.2)
