@@ -5,9 +5,10 @@ import unicornhat as unicorn
 import time, sys, getopt, webcolors
 
 from font import font
+from icons import icon
 
 unicorn.rotation(90)
-unicorn.brightness(0.2)
+unicorn.brightness(0.18)
 delay=0.05
 
 palette={0:webcolors.name_to_rgb('red'),
@@ -19,19 +20,20 @@ palette={0:webcolors.name_to_rgb('red'),
          6:webcolors.name_to_rgb('violet'),
          7:webcolors.name_to_rgb('lightslategray')}
 
-violet = webcolors.name_to_rgb('violet')
-orange = webcolors.name_to_rgb('orange')
-lightslategray = webcolors.name_to_rgb('lightslategray')
-snow   = webcolors.name_to_rgb('snow')
+outer_border  = webcolors.name_to_rgb('red')
+middle_border = webcolors.name_to_rgb('green')
+inner_border  = webcolors.name_to_rgb('blue')
+centre        = webcolors.name_to_rgb('white')
+
 attrib = [
-[violet,         violet,         violet,         violet,         violet,         violet,         violet,         violet],
-[violet,         orange,         orange,         orange,         orange,         orange,         orange,         violet], 
-[violet,         orange, lightslategray, lightslategray, lightslategray, lightslategray,         orange,         violet],
-[violet,         orange, lightslategray,           snow,           snow, lightslategray,         orange,         violet], 
-[violet,         orange, lightslategray,           snow,           snow, lightslategray,         orange,         violet], 
-[violet,         orange, lightslategray, lightslategray, lightslategray, lightslategray,         orange,         violet], 
-[violet,         orange,         orange,         orange,         orange,         orange,         orange,         violet], 
-[violet,         violet,         violet,         violet,         violet,         violet,         violet,         violet]]
+[outer_border,   outer_border,  outer_border,  outer_border,  outer_border,  outer_border,  outer_border, outer_border],
+[outer_border,  middle_border, middle_border, middle_border, middle_border, middle_border, middle_border, outer_border], 
+[outer_border,  middle_border,  inner_border,  inner_border,  inner_border,  inner_border, middle_border, outer_border],
+[outer_border,  middle_border,  inner_border,        centre,        centre,  inner_border, middle_border, outer_border], 
+[outer_border,  middle_border,  inner_border,        centre,        centre,  inner_border, middle_border, outer_border], 
+[outer_border,  middle_border,  inner_border,  inner_border,  inner_border,  inner_border, middle_border, outer_border], 
+[outer_border,  middle_border, middle_border, middle_border, middle_border, middle_border, middle_border, outer_border], 
+[outer_border,   outer_border,  outer_border,  outer_border,  outer_border,  outer_border,  outer_border, outer_border]]
 
 
 def rotate_string(text,mode=1,steps=1):
@@ -51,6 +53,11 @@ def message_to_bitmap(message):
             bitmap[y]+=font[character][y]
     return bitmap
 
+def add_icon_to_bitmap(image, bitmap):
+    for y in range(8):
+        bitmap[y]+=icon[image][y]
+    return bitmap
+
 def setpixel(x,y,mode):
     if type(mode)==str:
         if mode=="attrib":
@@ -64,26 +71,13 @@ def setpixel(x,y,mode):
     else:
         unicorn.set_pixel(x,y,255,255,255)
 
-def main():
-    bitmap=message_to_bitmap("@ukscone is the king of the scrolling pixels")
+def test():
+    bitmap=message_to_bitmap("Test ")
+    bitmap=add_icon_to_bitmap('smile',bitmap) 
     bitmap_len=len(bitmap[0])
     count=0
     while True:
-        while count < (bitmap_len*2):
-            count+=1
-            for y in range(8):
-                for x in range(8):
-                    if bitmap[y][x]=="#":
-                        setpixel(x,y,"palette_column")
-                    else:
-                        unicorn.set_pixel(x,y,0,0,0)
-            unicorn.show()
-            time.sleep(delay)
-            for y in range(8):
-                bitmap[y]=rotate_string(bitmap[y],1,1)
-        count=0
-        while count < (bitmap_len*2):
-            count+=1
+        while count < bitmap_len:
             for y in range(8):
                 for x in range(8):
                     if bitmap[y][x]=="#":
@@ -94,19 +88,21 @@ def main():
             time.sleep(delay)
             for y in range(8):
                 bitmap[y]=rotate_string(bitmap[y],1,1)
-        count=0
-        while count < (bitmap_len*2):
             count+=1
+        count=0
+        while count < bitmap_len:
             for y in range(8):
                 for x in range(8):
                     if bitmap[y][x]=="#":
-                        setpixel(x,y,"palette_row")
+                        setpixel(x,y,"attrib")
                     else:
                         unicorn.set_pixel(x,y,0,0,0)
             unicorn.show()
-            time.sleep(delay)
+            time.sleep(delay*8)
             for y in range(8):
-                bitmap[y]=rotate_string(bitmap[y],1,1)
+                bitmap[y]=rotate_string(bitmap[y],1,8)
+            count+=8
+        count=0
 
 if __name__ == "__main__":
-   main()
+   test()
